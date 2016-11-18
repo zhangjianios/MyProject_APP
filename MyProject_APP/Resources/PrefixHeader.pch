@@ -1,0 +1,167 @@
+//
+//  PrefixHeader.pch
+//  MyProject_APP
+//
+//  Created by mac on 16/11/16.
+//  Copyright © 2016年 mac. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+/*Xcode7以下版本需要添加下方宏定义 支持AF*/
+//#ifdef TARGET_OS_IOS
+//
+//#define TARGET_OS_IOS TARGET_OS_IPHONE
+//
+//#endif
+//
+//#ifndef TARGET_OS_WATCH
+//
+//#define TARGET_OS_WATCH 0
+//
+//#endif
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#endif
+
+#ifndef TARGET_OS_IOS
+#define TARGET_OS_IOS TARGET_OS_IPHONE
+#endif
+
+#ifndef TARGET_OS_WATCH
+#define TARGET_OS_WATCH 0
+#endif
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+/**
+ *  屏幕尺寸以及多屏幕适配
+ *
+ *  @return
+ */
+#define kScreenWidth [[UIScreen mainScreen] bounds].size.width
+#define kScreenHeight [[UIScreen mainScreen] bounds].size.height
+
+#define MDXFrom6(x) ([[UIScreen mainScreen] bounds].size.width/375.0*x)
+#define MDYFrom6(x) ([[UIScreen mainScreen] bounds].size.height/667.0*x)
+
+#define IOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 && [[[UIDevice currentDevice] systemVersion] floatValue] < 8.0)
+#define IOS8 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && [[[UIDevice currentDevice] systemVersion] floatValue] < 9.0)
+#define IOS9 [[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0
+
+//#define APP_TOKEN  [NSString stringWithFormat:@"%@;%@",[CHYmacAddress macAddress], [[NSUserDefaults standardUserDefaults] objectForKey:@"token"]]
+
+/**
+ *  通过RGB设置颜色
+ */
+#define kRGBColor(R,G,B)        [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1.0]
+//十六进制颜色
+#define UIColorFromRGB(rgbValue) [UIColor \
+colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+/**
+ *  移除iOS7之后，cell默认左侧的分割线边距
+ */
+#define kRemoveCellSeparator \
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{\
+cell.separatorInset = UIEdgeInsetsZero;\
+cell.layoutMargins = UIEdgeInsetsZero; \
+cell.preservesSuperviewLayoutMargins = NO; \
+}
+
+/**
+ *  通过Storyboard ID 在对应Storyboard中获取场景对象
+ */
+#define kVCFromSb(storyboardId, storyboardName)     [[UIStoryboard storyboardWithName:storyboardName bundle:nil] \
+instantiateViewControllerWithIdentifier:storyboardId]
+
+/**
+ *  Docment文件夹目录
+ */
+#define kDocumentPath NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject
+
+
+#define base_url @""
+#define KColor [UIColor blackColor]
+
+
+
+
+
+#import "AppDelegate.h"
+
+#import "BaseTabBarViewController.h"
+
+#import "UIViewExt.h"
+
+#import "MMDrawerController.h"
+
+#import "LeftSlideViewController.h"
+
+#import "UIView+ViewController.h"
+
+#import "PersonalCenterViewController.h"
+
+/**
+ *  第三方库的管理
+ */
+
+#import "AFNetworking.h"        //Github排名第一的第三方网络请求类库，封装了系统的NSURLSession+NSOperation
+#import "UIKit+AFNetworking.h"      //对UIKit类添加类拓展，让诸如UIButton, UIImageView等拥有了网络加载图片的功能
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+
+
+
+#import "FlatUIKit.h"
+
+#import "CocoaLumberjack.h" //优秀的替换NSLog的第三方，更加省资源，并且可以定义打印级别
+#ifdef DEBUG
+static const int ddLogLevel = DDLogLevelVerbose;
+#else
+static const int ddLogLevel = DDLogLevelError;
+#endif
+
+#import "MBProgressHUD.h"  //第三方socket通讯类库， 对系统CFNetwork类库进行了封装
+#import "Masonry.h"         //超好用的链式书写AutoLayout的第三方类库，好用的根本停不下来
+
+#import "FBShimmeringView.h"        //漂亮的闪光效果
+#import "FBShimmeringLayer.h"       //漂亮的闪光效果
+
+
+
+
+
+
+
+#endif /* PrefixHeader_pch */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

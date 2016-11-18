@@ -3,7 +3,7 @@
 //  MyProject_APPUITests
 //
 //  Created by mac on 16/11/16.
-//  Copyright © 2016年 zhangjian. All rights reserved.
+//  Copyright © 2016年 mac. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
